@@ -1,3 +1,3 @@
 # gauraangs-portfolio
 •made from html, css, js
-(website demo)[
+(website demo)[https://gauraangcodes.github.io/gauraangs-portfolio/]
