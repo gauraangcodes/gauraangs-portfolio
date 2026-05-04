@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+ <style>
+     body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  cursor: none;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 25px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.card{
+  width: 250px;
+  min-height: 260px;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  perspective: 1000px;
+}
+.card-inner {
+  position: relative;
+  width: 250px;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
+.front, .back {
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 20px;
+}
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+.text,.h-3,.h-1{
+    margin-left: 20px;
+    font-family: 'Cinzel Decorative', serif, monospace;
+    font-weight: bold;
+}
+.text{
+    font-size: large;
+}
+.knowledge{
+    margin-right: 20px
+}
+/* main cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(4px);
+
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  transition: transform 0.1s ease;
+}
+
+
+/* outer glow ring */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+
+  transition: all 0.15s ease;
+}
+.h-67{
+    margin-left: 5px;
+    font-family: 'Cinzel Decorative', serif, monospace;
+    font-weight: bold;
+}
+.yami{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+     transition: 1s;
+     image-resolution: 10000px;
+      image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+}
+.yami:hover{
+    transform: scale(1.1);
+}
+.parent-pic{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.child-pic{
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+}
+.contact-me{
+    margin-left: 0px;
+        font-family: 'Cinzel Decorative', serif, monospace;
+    font-weight: bold;
+}
+.attri-bute{
+      font-family: 'Cinzel Decorative', serif, monospace;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: large;
+    margin-bottom: 20px;
+    text-decoration: #66a6ff;
+    
+}
+.cp{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cc{
+    width: 900px;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     font-family: 'Cinzel Decorative', serif, monospace;
+    font-weight: bold;
+
+}
+.dc, .hub {
+  position: relative;
+  overflow: hidden;
+    padding: 10px 100px;
+}
+
+.dc span, .hub span {
+  display: block;
+  transition: 0.3s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.dc:hover .normal,
+.hub:hover .normal {
+  transform: translateY(-100%);
+}
+
+.dc:hover .hover,
+.hub:hover .hover {
+  transform: translateY(-100%);
+}
+ </style>
+      <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="parent-pic">
+        <div class="child-pic">
+            <img class="yami" src="data:image/webp;base64,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">
+        </div>
+        <a href="#contactid" class="attri-bute">
+            ConTacT
+        </a>
+    </div>
+    <div class="cursor"></div>
+<div class="cursor-ring"></div>
+    <div class="container">
+    <div class="card">
+  <div class="card-inner">
+    
+    <div class="front">
+      <h1 class="h-1">About Me</h1>
+    </div>
+
+    <div class="back">
+      <h3  class="h-3">About Me</h3>
+      <p class="text">  My names gauraang i like to code. I like to code and web-devoloping.</p>
+    </div>
+
+  </div>
+ </div>
+ <div class="card">
+    <div class="card-inner">
+        <div class="front">
+            <h1 class="h-1">
+                Hobbies
+            </h1>
+        </div>
+        <div class="back">
+            <h3 class="h-3">
+                Hobbies
+            </h3>
+            <p class="text">
+                &bull; 👩‍💻Coding <br>
+                &bull; ⚽football <BR>
+                &bull; ♟Chess <br>
+                &bull; 🎮GaminG <br>
+                &bull; 🎧Music <br>
+            </p>
+        </div>
+    </div>
+ </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="front">
+                    <h1 class="h-1">
+                        Education
+                    </h1>
+                </div>
+                <div class="back">
+                    <h3 class="h-3">
+                        Education
+                    </h3>
+                    <p class="text">
+                        I study in master mind global i am currently in class 9th i have and  i won  6 football tournaments with my school
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="front">
+                <h1 class="h-67">
+                    Coding Knowledge
+                </h1>
+            </div>
+            <div class="back">
+                <h3 class="h-3">
+                    Coding game
+                </h3>
+                <p class="text">
+                    I have learned html css and iam learning js my progress in web-devoloping is
+                </p>
+                <p class="text">
+                    &bull; html-90% <br>
+                    &bull; css-45% <br>
+                    &bull; js-20% <br>
+                </p>
+            </div>
+        </div>
+     </div>   
+   
+     <div class="card">
+        <div class="card-inner">
+            <div class="front">
+                <h1 class="h-1 ">
+                    Projects Made
+                </h1>
+            </div>
+            <div class="back">
+                <h3 class="h-3">
+                    Websites made
+                </h3>
+                <p class="text">I have made 4  websites and iam currently working with a shop to make their website</p>
+            </div>
+        </div>
+     </div>
+    
+       <div class="card">
+        <div class="card-inner">
+            <div class="front">
+            <h1 class="contact-me">
+                Websites to contact me
+            </h1>
+            </div>
+        
+        <div class="back">
+            <h3 class="h-3">
+                Websites to contact me
+            </h3>
+            <p class="text">
+                 &bull; GitHub <br>
+                 &bull; DisCord <br>
+            </p>
+        </div>
+     </div>
+</div>
+     <div class="cp">
+        <div id="contactid" class="cc">
+            <h1 class="dc">
+               <span class="normal">Discord</span> 
+               <span class="hover">gauraang1772 </span>
+               </span>
+            </h1>
+            <h1 class="hub">
+                <span class="normal">GiTHub</span>
+                <span class="hover">gauraangcodes</span>
+            </h1>
+        </div>
+     </div>
+</div>
+
+
+<script>
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 10;
+    const rotateY = (x - centerX) / 10;
+
+    card.style.transform = 
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = 
+      "rotateX(0deg) rotateY(0deg) scale(1)";
+  });
+});
+</script>
+
+<script>
+const cursor = document.querySelector(".cursor");
+const ring = document.querySelector(".cursor-ring");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+
+  ring.style.left = e.clientX + "px";
+  ring.style.top = e.clientY + "px";
+});
+</script>
+
+<script>
+    const cardglow = document.querySelectorAll(".card");
+
+cardglow.forEach(card => {
+  card.addEventListener("mouseenter", () => {
+    ring.style.transform = "translate(-50%, -50%) scale(1.6)";
+  });
+
+  card.addEventListener("mouseleave", () => {
+    ring.style.transform = "translate(-50%, -50%) scale(1)";
+  });
+});
+</script>
+
+</body>
+
+</html>
